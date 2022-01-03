@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit">
+</form>
+
+{% for item in items %}
+<ul>
+    <li>
+        {{item.title}} - {{item.amount}} &#8377
+        <span><a href="{% url 'update-item' item.id %}">Update</a></span>
+        <span><a href="{% url 'delete-item' item.id %}">Delete</a></span>
+        <span>{{item.tags}}</span>
+    </li>
+   
+</ul>
+
+{% endfor %}
+<h1>Total amount spent - {{total}} &#8377</h1>
+
+<button>Save</button>
+{% endblock content %}
