@@ -7,6 +7,7 @@ from django.contrib.auth import login, authenticate,logout
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def loginUser(request):
@@ -39,23 +40,29 @@ def logoutUser(request):
     messages.error(request, "Successfully logged out")
     return redirect('login')
 
+@login_required
 def home(request):
-    items = Item.objects.all()
+    items = Item.objects.filter(user = request.user)
     form = ItemForm()
     total = 0
     for item in items:
         total += int(item.amount)
-    if request.method == "POST":
-        form = ItemForm(request.POST)
-        if form.is_valid:
-            form.save()
-            
-            return redirect('home')
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            user = request.user
+            form = ItemForm(request.POST)
+            if form.is_valid:
+                itemList = form.save(commit=False)
+                itemList.user = user
+                itemList.save()
+                
+                return redirect('home')
 
     context = {'form':form, 'items':items,'total':total}
     print(request.user)
     return render(request,'budget/home.html',context)
 
+@login_required
 def update(request, pk):
     item = Item.objects.get(id= pk)
     form = ItemForm(instance = item)
@@ -69,6 +76,7 @@ def update(request, pk):
     context = {'item':item, 'form':form}
     return render(request,'budget/update-template.html',context)
 
+@login_required
 def delete(request, pk):
     item = Item.objects.get(id= pk)
     

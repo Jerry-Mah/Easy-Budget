@@ -1,6 +1,9 @@
 {% extends 'main.html' %}
 
+{%load crispy_forms_tags %} 
 {% block content %}
+
+
 <style>
     .chip{
         padding: .19rem;
@@ -16,7 +19,7 @@
 
 <div class="container-sm my-4">
     <div class="mt-4 d-flex justify-content-center fs-5 fw-bold">
-        <form action="" method="POST">
+        <form action="{% url 'home' %}" method="POST">
             {% csrf_token %}
             {{form}}
             <input type="submit" class = "btn btn-info mx-2">

@@ -1,11 +1,14 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit">
-</form>
-
+<div class="container-sm my-4">
+    <div class="mt-4 d-flex justify-content-center fs-5 fw-bold">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" class = "btn btn-info mx-2">
+        </form>
+    </div>
+    
 
 {% endblock content %}

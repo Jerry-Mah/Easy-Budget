@@ -1,13 +1,14 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<form method = "POST">
-    {% csrf_token %}
-    <p>Are you sure you want to delete "{{item}}" ?</p>
-    <button><a href="{% url 'home' %}">
-        Go back
-    </a></button>
-    <input type="submit" value = "confirm">
-</form>
+<div class="container mx-auto my-3 d-flex justify-content-center">
+    <form method = "POST">
+        {% csrf_token %}
+        <h2 class = "my-4">Are you sure you want to delete "{{item}}" ?</h2>
+        <a class = "btn btn-warning" href="{% url 'home' %}">Go back</a>
+        <input class = "btn btn-danger" type="submit" value = "confirm">
+    </form>
+    
+</div>
 
 {% endblock content %}
