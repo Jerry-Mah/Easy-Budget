@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 
-
 def userProfile(request,pk):
     profile = Profile.objects.get(id = pk)
     context = {'profile':profile}

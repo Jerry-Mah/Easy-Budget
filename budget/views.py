@@ -29,7 +29,7 @@ def home(request):
                 return redirect('home')
 
     context = {'form':form, 'items':items,'total':total}
-    print(request.user)
+    
     return render(request,'budget/home.html',context)
 
 @login_required

@@ -33,7 +33,7 @@
     <div class="container card my-3">
       {% for item in user.itemOwner.all %}
         
-      <ul class="list-group list-group-flush fs-6">
+      <ul class="list-group list-group-flush fs-5">
         <li class="list-group-item my-2">
           {{item.title}} - {{item.amount}} &#8377
           
@@ -55,7 +55,7 @@
     </div>
    
     <!-- </div> -->
-    <h1>Total amount spent - {{total}} &#8377</h1>
+    <h2>Total amount spent - {{total}} &#8377</h2>
 
     <button class = "btn btn-info">Save</button>
 </div>
