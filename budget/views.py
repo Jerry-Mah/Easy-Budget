@@ -10,37 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def loginUser(request):
-    # if request.user.is_authenticated:
-    #     return redirect('home')
-
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-
-        try:
-            user = User.objects.get(username = username)
-            print(user)
-        except:
-            messages.error(request, "Username does not exist")
-
-        user = authenticate(request, username= username, password= password)
-        if user is not None:
-            login(request, user)
-            messages.error(request, "Successfully loged in")
-            return redirect('home')
-        else:
-            messages.error(request, "Username or password is incorrect")
-        
-    
-    return render(request, "budget/login_register.html")
-
-def logoutUser(request):
-    logout(request)
-    messages.error(request, "Successfully logged out")
-    return redirect('login')
-
-@login_required
+@login_required(login_url='login')
 def home(request):
     items = Item.objects.filter(user = request.user)
     form = ItemForm()
