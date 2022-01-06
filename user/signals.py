@@ -7,9 +7,9 @@ from django.dispatch import receiver
 def createProfile(sender , instance,created,**kwargs):
     if created:
         user = instance
-        
         profile = Profile.objects.create(
             user = user,
+            name = user.first_name,
             username = user.username,
             email = user.email
         )

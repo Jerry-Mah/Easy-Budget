@@ -2,10 +2,11 @@
 
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container mx-auto my-4">
+<div class="container mx-auto my-4 w-50">
     <form action="" method = "POST">
         {% csrf_token %}
         {{form|crispy}}
+        <!-- <div id='form-errors'>{{ form_errors }}</div> -->
         <input class = "btn btn-success my-3" type="submit" name = "create user">
         <p>Already have an account?<a href="{% url 'login' %}"> login</a></p>
     </form>

@@ -51,10 +51,14 @@ def signupUser(request):
         if request.method == "POST":
             form = createUserForm(request.POST)
             if not form.is_valid():
-                messages.error(request,"Passwords did not match. Try again.")
-                return redirect('signup')
+                messages.error(request,"Some errors occured. Try again.")
+                context = {'form':form, 'form_errors':form.errors}
+                return render(request, "authentication/signup.html", context)
             elif form.is_valid():
-                form.save()
+                user = form.save(commit = False)
+                user.save()
+                login(request,user)
+                
                 messages.success(request,"User successfuly created.")
                 return redirect('login')
         
