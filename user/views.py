@@ -22,7 +22,7 @@ def editUser(request):
     form = editUserForm(instance = user.profile)
     context = {'form':form}
     if request.method == "POST":
-        form = editUserForm(request.POST, instance=user.profile)
+        form = editUserForm(request.POST, request.FILES,instance=user.profile)
         if form.is_valid:
             form.save()
             return redirect('profile')

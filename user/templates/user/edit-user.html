@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container-sm my-4">
     <div class="mt-4 fs-5 fw-bold">
-        <form action="{% url 'edit-user' %}" method="POST">
+        <form action="{% url 'edit-user' %}" method="POST" enctype = "multipart/form-data">
             {% csrf_token %}
             {{form|crispy}}
             <input type="submit" class = "btn btn-info mx-2">
