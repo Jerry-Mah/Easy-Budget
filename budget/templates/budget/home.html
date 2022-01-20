@@ -1,18 +1,21 @@
 {% extends 'main.html' %}
 
 {%load crispy_forms_tags %} 
+
 {% block content %}
 
 
 <style>
-    .chip{
-        padding: .19rem;
-        height: 52px;
-        /* line-height: 52px; */
-        border-radius: 5px;
-        background-color: #324B4B;
-        color:white;
-    }
+  .chip{
+    padding: .19rem;
+    height: 52px;
+    /* line-height: 52px; */
+    border-radius: 5px;
+    background-color: #324B4B;
+    color:white;
+}
+
+ 
 
 </style>
 
@@ -57,6 +60,10 @@
     <!-- </div> -->
     <h2>Total amount spent - {{total}} &#8377</h2>
 
-    <button class = "btn btn-info">Save</button>
+    
+   
+      
+    <a href= "#"><button class = "btn btn-info">save sheet</button></a>
+    
 </div>
 {% endblock content %}

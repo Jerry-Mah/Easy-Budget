@@ -55,3 +55,6 @@ def delete(request, pk):
         return redirect('home')
     context = {'item':item}
     return render(request,'budget/delete-template.html',context)    
+
+
+

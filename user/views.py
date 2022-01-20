@@ -13,6 +13,7 @@ from budget.forms import editUserForm
 def userProfile(request):
     user = request.user
     profile = Profile.objects.get(user = user)
+    
     context = {'profile':profile}
     return render(request, 'user/profile.html',context)
 
@@ -28,3 +29,5 @@ def editUser(request):
             return redirect('profile')
 
     return render(request, "user/edit-user.html",context)
+
+

@@ -1,3 +1,14 @@
 body{
     background-color: #D9DAFF;
 }
+
+.chip{
+    padding: .19rem;
+    height: 52px;
+    /* line-height: 52px; */
+    border-radius: 5px;
+    background-color: #324B4B;
+    color:white;
+}
+
+
