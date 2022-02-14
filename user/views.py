@@ -7,13 +7,13 @@ from .models import Profile
 from django.contrib import messages
 from django.contrib.auth.models import User
 from budget.forms import editUserForm
+from budget.models import Sheet
 # Create your views here.
 
 
 def userProfile(request):
     user = request.user
     profile = Profile.objects.get(user = user)
-    
     context = {'profile':profile}
     return render(request, 'user/profile.html',context)
 
@@ -30,4 +30,16 @@ def editUser(request):
 
     return render(request, "user/edit-user.html",context)
 
+def delete(request,pk):
+    sheet = Sheet.objects.get(id = pk)
+    if request.method == "POST":
+        sheet.delete()
+        return redirect('profile')
+    context = {'item':sheet}
+    return render(request,'budget/delete-template.html',context)
 
+
+
+def sheetView(request,pk):
+    context={}
+    return render(request,'user/sheet.html',context)

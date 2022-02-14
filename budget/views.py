@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import ItemForm
+from .forms import ItemForm, sheetForm
 from .models import Item
 from django.core.checks import messages
 from django.shortcuts import redirect, render
@@ -55,6 +55,21 @@ def delete(request, pk):
         return redirect('home')
     context = {'item':item}
     return render(request,'budget/delete-template.html',context)    
+
+def sheet(request):
+    form = sheetForm()
+    if request.method == 'POST':
+        user = request.user
+        form = sheetForm(request.POST)
+        if form.is_valid:
+            sheetList = form.save(commit=False)
+            sheetList.user = user
+            sheetList.save()
+
+            return redirect('home')
+
+    context = {"form":form}
+    return render(request,"budget/sheet-template.html",context)
 
 
 

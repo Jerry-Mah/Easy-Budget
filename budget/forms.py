@@ -1,7 +1,6 @@
 from dataclasses import field
 from django.forms import ModelForm
-from user.models import Profile
-from .models import Item
+from .models import Item,Sheet
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
@@ -29,6 +28,13 @@ class editUserForm(ModelForm):
         model = Profile
         fields = "__all__"
         exclude = ['user']
+
+class sheetForm(ModelForm):
+    class Meta:
+        model = Sheet
+        fields = "__all__"
+        exclude = ['user']
+
 
 
     
