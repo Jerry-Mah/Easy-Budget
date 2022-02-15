@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from user.utils import object_assigner, del_items
 
 # Create your views here.
 @login_required(login_url='login')
@@ -29,7 +30,6 @@ def home(request):
                 return redirect('home')
 
     context = {'form':form, 'items':items,'total':total}
-    
     return render(request,'budget/home.html',context)
 
 @login_required
@@ -61,11 +61,12 @@ def sheet(request):
     if request.method == 'POST':
         user = request.user
         form = sheetForm(request.POST)
+        object_assigner(request)
         if form.is_valid:
             sheetList = form.save(commit=False)
             sheetList.user = user
             sheetList.save()
-
+            del_items()
             return redirect('home')
 
     context = {"form":form}

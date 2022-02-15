@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.contrib.auth.models import User
 from django.db import models
 import uuid
@@ -11,7 +12,7 @@ class Item(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE, null = True,related_name="itemOwner")
     title = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=10000, decimal_places=2)
-    tags = models.ForeignKey('Tag',null = True,on_delete=DO_NOTHING)
+    tags = models.ForeignKey('Tag',null = True,on_delete=models.CASCADE)
 
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique = True, primary_key=True, editable=False)
