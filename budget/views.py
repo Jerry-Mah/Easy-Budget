@@ -1,12 +1,7 @@
 from django.shortcuts import render,redirect
 from .forms import ItemForm, sheetForm
 from .models import Item
-from django.core.checks import messages
 from django.shortcuts import redirect, render
-from django.contrib.auth import login, authenticate,logout
-from django.http import HttpResponse
-from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from user.utils import object_assigner, del_items
 
@@ -61,16 +56,23 @@ def sheet(request):
     if request.method == 'POST':
         user = request.user
         form = sheetForm(request.POST)
-        object_assigner(request)
         if form.is_valid:
             sheetList = form.save(commit=False)
             sheetList.user = user
             sheetList.save()
-            del_items()
+            object_assigner(request,sheetList)
+            del_items(request)
             return redirect('home')
 
     context = {"form":form}
     return render(request,"budget/sheet-template.html",context)
+
+# def clear(request):
+#     if request.method == "POST":
+#         del_items(request)
+#         return redirect('home')
+#     context = {'item':'all items'}
+#     return render(request,'budget/delete-template.html',context)    
 
 
 

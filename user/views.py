@@ -1,13 +1,9 @@
-from django.core.checks import messages
-from django.http.response import HttpResponsePermanentRedirect
 from django.shortcuts import redirect, render
-from django.contrib.auth import login, authenticate,logout
-from django.http import HttpResponse
 from .models import Profile
-from django.contrib import messages
-from django.contrib.auth.models import User
 from budget.forms import editUserForm
 from budget.models import Sheet
+from .models import ItemClone
+from budget.forms import ItemForm
 
 # Create your views here.
 
@@ -40,7 +36,18 @@ def delete(request,pk):
     return render(request,'budget/delete-template.html',context)
 
 
-
 def sheetView(request,pk):
-    context={}
+    sheet1 = Sheet.objects.get(id = pk)
+
+    context={"id": pk,"title":sheet1.name}
     return render(request,'user/sheet.html',context)
+
+
+def deleteItem(request, pk):
+    item = ItemClone.objects.get(id= pk)
+    
+    if request.method == "POST":
+        item.delete()
+        return redirect('profile')
+    context = {'item':item}
+    return render(request,'budget/delete-template.html',context)   

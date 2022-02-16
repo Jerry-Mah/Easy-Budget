@@ -31,16 +31,10 @@ class Tag(models.Model):
 class Sheet(models.Model):
     user = models.ForeignKey(User, on_delete= models.CASCADE, null = True, related_name='sheets')
     name = models.CharField(max_length= 200)
-
+    
     created = models.DateTimeField(auto_now = True)
     id = models.UUIDField(default = uuid.uuid4, unique = True , primary_key=True, editable=False)
-
-    @classmethod
-    def create_clone_item(cls, item):
-        obj = cls(user=item.user, title=item.title, amount=item.amount, tags=item.tags)
-        obj.save()
-        return obj
-
+    
     def __str__(self):
         return self.name
 

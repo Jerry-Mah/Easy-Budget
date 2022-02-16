@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 import uuid
 from django.dispatch import receiver
-from budget.models import Tag
+from budget.models import Tag,Sheet
 
 # Create your models here.
 class Profile(models.Model):
@@ -26,6 +26,8 @@ class ItemClone(models.Model):
     title = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=10000, decimal_places=2)
     tags = models.ForeignKey(Tag,null = True,on_delete=models.CASCADE)
+    sheet = models.ForeignKey(Sheet,null = True, on_delete=models.CASCADE)
+    id_filter = models.CharField(max_length=100, null = True, blank = False)
 
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique = True, primary_key=True, editable=False)
