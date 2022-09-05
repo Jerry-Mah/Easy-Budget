@@ -4,6 +4,7 @@ from budget.forms import editUserForm
 from budget.models import Sheet
 from .models import ItemClone
 from budget.forms import ItemForm
+from budget.models import Item
 
 # Create your views here.
 
@@ -44,10 +45,10 @@ def sheetView(request,pk):
 
 
 def deleteItem(request, pk):
-    item = ItemClone.objects.get(id= pk)
+    item = Item.objects.get(id= pk)
     
     if request.method == "POST":
         item.delete()
-        return redirect('profile')
+        return redirect('home')
     context = {'item':item}
     return render(request,'budget/delete-template.html',context)   
